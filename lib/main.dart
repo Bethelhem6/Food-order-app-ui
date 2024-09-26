@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, no_logic_in_create_state, avoid_print
 
-import 'package:challenge_2/screens/home.dart';
-import 'package:challenge_2/screens/order_summery.dart';
+import 'package:challenge_2/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: OrderSummery(),
+      home: ProfileScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
