@@ -1,7 +1,9 @@
 import 'package:challenge_2/screens/detail_sceen.dart';
+import 'package:challenge_2/screens/profile_screen.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,16 +15,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
+  Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarIconBrightness: Brightness.dark,
     ));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: DefaultTabController(
@@ -42,15 +39,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           Colors.black,
                           BlendMode.srcATop,
                         )),
-                    Container(
-                      height: 50,
-                      width: 65,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              image: NetworkImage(
-                                  'https://th.bing.com/th/id/OIP.AcLhLt0m-3_LRbvI6NXAngHaHa?rs=1&pid=ImgDetMain'),
-                              fit: BoxFit.cover)),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ProfileScreen()));
+                      },
+                      child: Hero(
+                        tag: "profile",
+                        child: Container(
+                          height: 50,
+                          width: 65,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                  image: NetworkImage(
+                                      'https://th.bing.com/th/id/OIP.AcLhLt0m-3_LRbvI6NXAngHaHa?rs=1&pid=ImgDetMain'),
+                                  fit: BoxFit.cover)),
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -201,7 +209,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   foodItem['image'],
                                   fit: BoxFit.cover,
                                 ),
-                              ),
+                              )
+                                  .animate(delay: 400.ms)
+                                  .shimmer(
+                                      duration:
+                                          const Duration(seconds: 1) - 200.ms)
+                                  .flip(),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -233,7 +246,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )
                                   ],
                                 ),
-                              ),
+                              )
+                                  .animate()
+                                  .fadeIn(
+                                      duration: 300.ms,
+                                      delay: const Duration(seconds: 1),
+                                      curve: Curves.decelerate)
+                                  .slideX(begin: 0.2, end: 0),
                             ],
                           ),
                         ),
@@ -246,27 +265,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
-            label: 'Orders',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -278,7 +276,7 @@ final List<Map<String, dynamic>> foodItems = [
     'descriptionLong':
         "The Cheeseburger Wendy's Burger is a classic fast food burger that packs a punch of flavor in every bite. Made with a juicy beef patty cooked to perfection, it's topped with melted American cheese, crispy lettuce, ripe tomato, and crunchy pickles.",
     'rating': 4.9,
-    'image': 'assets/image 6.png', // Replace with actual image link
+    'image': 'assets/image 9.png', // Replace with actual image link
   },
   {
     'name': 'Veggie Burger',
@@ -286,7 +284,7 @@ final List<Map<String, dynamic>> foodItems = [
     'descriptionLong':
         'Enjoy our delicious Hamburger Veggie Burger, made with a savory blend of fresh vegetables and herbs, topped with crisp lettuce, juicy tomatoes, and tangy pickles, all served on a soft, toasted bun. ',
     'rating': 4.8,
-    'image': 'assets/image 5.png', // Replace with actual image link
+    'image': 'assets/image 10.png', // Replace with actual image link
   },
   {
     'name': 'Chicken Burger',
@@ -294,7 +292,7 @@ final List<Map<String, dynamic>> foodItems = [
     'descriptionLong':
         'Our chicken burger is a delicious and healthier alternative to traditional beef burgers, perfect for those looking for a lighter meal option. Try it today and experience the mouth-watering flavors of our Hamburger Chicken Burger!',
     'rating': 4.6,
-    'image': 'assets/image 4.png', // Replace with actual image link
+    'image': 'assets/image 11.png', // Replace with actual image link
   },
   {
     'name': 'Fried Chicken Burger',
@@ -302,35 +300,7 @@ final List<Map<String, dynamic>> foodItems = [
     'descriptionLong':
         'Indulge in our crispy and savory Fried Chicken Burger, made with a juicy chicken patty, hand-breaded and deep-fried to perfection, served on a warm bun with lettuce, tomato, and a creamy sauce.',
     'rating': 4.5,
-    'image': 'assets/image 3.png', // Replace with actual image link
-  },
-  {
-    'name': 'Cheeseburger',
-    'description': "Wendy's Burger",
-    'descriptionLong': "Wendy's Burger",
-    'rating': 4.9,
-    'image': 'assets/image 6.png', // Replace with actual image link
-  },
-  {
-    'name': 'Veggie Burger',
-    'description': "Wendy's Burger",
-    'descriptionLong': 'Hamburger',
-    'rating': 4.8,
-    'image': 'assets/image 5.png', // Replace with actual image link
-  },
-  {
-    'name': 'Chicken Burger',
-    'description': "Wendy's Burger",
-    'descriptionLong': 'Hamburger',
-    'rating': 4.6,
-    'image': 'assets/image 4.png', // Replace with actual image link
-  },
-  {
-    'name': 'Fried Chicken Burger',
-    'descriptionLong': 'Hamburger',
-    'description': "Wendy's Burger",
-    'rating': 4.5,
-    'image': 'assets/image 3.png', // Replace with actual image link
+    'image': 'assets/image 12.png', // Replace with actual image link
   },
 ];
 Container tabs(String skill, bool isSelected) {

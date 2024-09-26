@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api, no_logic_in_create_state, avoid_print
 
-import 'package:challenge_2/screens/profile_screen.dart';
+import 'package:challenge_2/screens/splash.dart';
+import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,8 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ProfileScreen(),
+    return MaterialApp(
+      home: const Splash(),
+      theme: ThemeData(
+          primaryColor: primaryColor,
+          primarySwatch: Colors.green,
+          useMaterial3: false,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
     );
   }

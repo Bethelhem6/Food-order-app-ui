@@ -1,6 +1,7 @@
 import 'package:challenge_2/screens/customize_burger_screen.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class FoodDetailScreen extends StatefulWidget {
   final Map<String, dynamic> foodItem;
@@ -18,38 +19,66 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () {},
-          ),
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 25,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: const Icon(
+                    Icons.search,
+                    size: 25,
+                  ),
+                ),
+              ]
+                  .animate(interval: 200.ms, delay: const Duration(seconds: 1))
+                  .scaleXY(
+                      begin: 0,
+                      end: 1,
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.decelerate),
+            ),
             Center(
               child: Image.asset(
                 widget.foodItem['image'], // Replace with actual image link
                 height: 200,
               ),
-            ),
+            )
+                .animate()
+                .scaleXY(
+                    begin: 0.0,
+                    end: 1.0,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.decelerate)
+                .fadeIn()
+                .blurXY(begin: 10, end: 0),
             const SizedBox(height: 20),
             Text(
               '${widget.foodItem['name']} ${widget.foodItem['description']}',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            )
+                .animate()
+                .fadeIn(
+                    duration: 300.ms,
+                    delay: const Duration(seconds: 1),
+                    curve: Curves.decelerate)
+                .slideX(begin: 0.2, end: 0),
             const SizedBox(height: 8),
             Row(
               children: [
@@ -62,12 +91,24 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                 const SizedBox(width: 10),
                 const Text("-   26 mins", style: TextStyle(color: Colors.grey)),
               ],
-            ),
+            )
+                .animate()
+                .fadeIn(
+                    duration: 300.ms,
+                    delay: const Duration(seconds: 1),
+                    curve: Curves.decelerate)
+                .slideX(begin: 0.2, end: 0),
             const SizedBox(height: 15),
             Text(
               widget.foodItem['descriptionLong'],
               style: TextStyle(fontSize: 15, color: Colors.grey[600]),
-            ),
+            )
+                .animate()
+                .fadeIn(
+                    duration: 300.ms,
+                    delay: const Duration(seconds: 1),
+                    curve: Curves.decelerate)
+                .slideX(begin: 0.2, end: 0),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,7 +234,13 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                   ],
                 ),
               ],
-            ),
+            )
+                .animate()
+                .fadeIn(
+                    duration: 300.ms,
+                    delay: const Duration(seconds: 1),
+                    curve: Curves.easeInOut)
+                .slideX(begin: 0.2, end: 0),
             const SizedBox(height: 20),
             const Spacer(),
             Row(

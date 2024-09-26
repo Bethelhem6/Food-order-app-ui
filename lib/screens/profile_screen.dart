@@ -48,6 +48,11 @@ class ProfileScreen extends StatelessWidget {
                           icon: const Icon(Icons.arrow_back_ios,
                               color: Colors.white),
                           onPressed: () {
+                            SystemChrome.setSystemUIOverlayStyle(
+                                const SystemUiOverlayStyle(
+                              statusBarColor: Colors.white,
+                              statusBarIconBrightness: Brightness.dark,
+                            ));
                             Navigator.pop(context);
                           },
                         ),
@@ -214,40 +219,43 @@ class ProfileScreen extends StatelessWidget {
                 top: 100,
                 left: 0,
                 right: 0,
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              spreadRadius: 0.5,
-                              blurRadius: 5,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                          border: Border.all(color: primaryColor, width: 3)),
-                      child: Container(
-                        height: 130,
-                        width: 130,
+                child: Hero(
+                  tag: "profile",
+                  child: Column(
+                    children: [
+                      Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.3),
                                 spreadRadius: 0.5,
                                 blurRadius: 5,
                                 offset: const Offset(0, 1),
                               ),
                             ],
-                            image: const DecorationImage(
-                                image: NetworkImage(
-                                    'https://th.bing.com/th/id/OIP.AcLhLt0m-3_LRbvI6NXAngHaHa?rs=1&pid=ImgDetMain'),
-                                fit: BoxFit.cover)),
+                            border: Border.all(color: primaryColor, width: 3)),
+                        child: Container(
+                          height: 130,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  spreadRadius: 0.5,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 1),
+                                ),
+                              ],
+                              image: const DecorationImage(
+                                  image: NetworkImage(
+                                      'https://th.bing.com/th/id/OIP.AcLhLt0m-3_LRbvI6NXAngHaHa?rs=1&pid=ImgDetMain'),
+                                  fit: BoxFit.cover)),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

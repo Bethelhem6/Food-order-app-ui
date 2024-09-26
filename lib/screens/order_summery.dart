@@ -1,3 +1,4 @@
+import 'package:challenge_2/screens/widgets/payment_success.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -107,7 +108,7 @@ class _OrderSummeryState extends State<OrderSummery> {
           ],
         ),
       ),
-      bottomSheet: BottomBar(totalPrice: "\$18.19"),
+      bottomSheet: const BottomBar(totalPrice: "\$18.19"),
     );
   }
 }
@@ -119,11 +120,11 @@ class PriceDetailRow extends StatelessWidget {
   final bool isBold;
 
   const PriceDetailRow({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     this.isBold = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -163,13 +164,13 @@ class PaymentMethodCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const PaymentMethodCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.cardType,
     required this.cardNumber,
     required this.isSelected,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +243,7 @@ class PaymentMethodCard extends StatelessWidget {
 class BottomBar extends StatelessWidget {
   final String totalPrice;
 
-  const BottomBar({Key? key, required this.totalPrice}) : super(key: key);
+  const BottomBar({super.key, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -274,26 +275,31 @@ class BottomBar extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 37, 13, 13),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: .5,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
+          InkWell(
+            onTap: () {
+              showPaymentSuccessDialog(context);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 37, 13, 13),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    spreadRadius: .5,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Text(
+                "Pay Now",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Text(
-              "Pay Now",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -307,7 +313,7 @@ class BottomBar extends StatelessWidget {
 class SectionTitle extends StatelessWidget {
   final String title;
 
-  const SectionTitle({Key? key, required this.title}) : super(key: key);
+  const SectionTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -319,4 +325,14 @@ class SectionTitle extends StatelessWidget {
       ),
     );
   }
+}
+
+// Function to show the dialog
+void showPaymentSuccessDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return const PaymentSuccessDialog();
+    },
+  );
 }
