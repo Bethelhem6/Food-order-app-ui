@@ -1,8 +1,13 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:challenge_2/screens/order_summery.dart';
+import 'package:challenge_2/screens/order%20summery/order_summery.dart';
 import 'package:challenge_2/utils/colors.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class CustomizeBurgerScreen extends StatefulWidget {
+  const CustomizeBurgerScreen({super.key});
+
   @override
   _CustomizeBurgerScreenState createState() => _CustomizeBurgerScreenState();
 }
@@ -69,13 +74,18 @@ class _CustomizeBurgerScreenState extends State<CustomizeBurgerScreen> {
             // Toppings Section
             _buildSectionTitle('Toppings'),
             const SizedBox(height: 10),
-            _buildOptionsGrid(toppings, selectedToppings, toggleSelection),
+            _buildOptionsGrid(toppings, selectedToppings, toggleSelection)
+                .animate(delay: 400.ms)
+                .shimmer(duration: const Duration(seconds: 1) - 200.ms)
+                .flip(),
             const SizedBox(height: 20),
             // Side Options Section
             _buildSectionTitle('Side options'),
             const SizedBox(height: 10),
-            _buildOptionsGrid(
-                sideOptions, selectedSideOptions, toggleSelection),
+            _buildOptionsGrid(sideOptions, selectedSideOptions, toggleSelection)
+                .animate(delay: 400.ms)
+                .shimmer(duration: const Duration(seconds: 1) - 200.ms)
+                .flip(),
           ],
         ),
       ),
@@ -93,7 +103,10 @@ class _CustomizeBurgerScreenState extends State<CustomizeBurgerScreen> {
             'assets/pngwing 13.png',
             height: 300,
           ),
-        ),
+        )
+            .animate(delay: 400.ms)
+            .shimmer(duration: const Duration(seconds: 1) - 200.ms)
+            .flip(),
         const SizedBox(width: 15),
         SizedBox(
           width: MediaQuery.of(context).size.width * .4,
@@ -103,20 +116,38 @@ class _CustomizeBurgerScreenState extends State<CustomizeBurgerScreen> {
               const Text(
                 'Customize',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
+              ).animate().fadeIn(
+                  duration: 300.ms,
+                  delay: const Duration(seconds: 1),
+                  curve: Curves.easeInCirc),
               const SizedBox(height: 10),
               Text(
                 'Your Burger to Your Tastes. Ultimate Experience',
                 style: TextStyle(
                     fontWeight: FontWeight.normal, color: Colors.grey[600]),
-              ),
+              ).animate().fadeIn(
+                  duration: 300.ms,
+                  delay: const Duration(seconds: 1),
+                  curve: Curves.easeInCirc),
               const SizedBox(height: 15),
-              _buildSpicySlider(),
+              _buildSpicySlider()
+                  .animate()
+                  .fadeIn(
+                      duration: 300.ms,
+                      delay: const Duration(seconds: 1),
+                      curve: Curves.decelerate)
+                  .slideX(begin: 0.2, end: 0),
               const SizedBox(height: 20),
-              _buildPortionSelector(),
+              _buildPortionSelector()
+                  .animate()
+                  .fadeIn(
+                      duration: 300.ms,
+                      delay: const Duration(seconds: 1),
+                      curve: Curves.decelerate)
+                  .slideX(begin: 0.2, end: 0),
             ],
           ),
-        ),
+        )
       ],
     );
   }
@@ -265,7 +296,7 @@ class _CustomizeBurgerScreenState extends State<CustomizeBurgerScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(option['name'],
-                    style: const TextStyle(color: Colors.white, fontSize: 12)),
+                    style: const TextStyle(color: Colors.white, fontSize: 10)),
                 Icon(isSelected ? Icons.add_circle : Icons.add_circle_outline,
                     color: Colors.red, size: 20),
               ],

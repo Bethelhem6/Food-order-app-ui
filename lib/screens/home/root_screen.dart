@@ -1,10 +1,10 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:challenge_2/screens/home.dart';
+import 'package:challenge_2/screens/home/home.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedBottomBar extends StatefulWidget {
-  AnimatedBottomBar({Key? key}) : super(key: key);
+  const AnimatedBottomBar({super.key});
 
   @override
   State<AnimatedBottomBar> createState() => _AnimatedBottomBarState();

@@ -1,5 +1,5 @@
-import 'package:challenge_2/screens/detail_sceen.dart';
-import 'package:challenge_2/screens/profile_screen.dart';
+import 'package:challenge_2/screens/detail/detail_sceen.dart';
+import 'package:challenge_2/screens/profile/profile_screen.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -135,7 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           BlendMode.srcATop,
                         )),
                   ))
-                ]),
+                ])
+                    .animate()
+                    .fadeIn(
+                        duration: 300.ms,
+                        delay: const Duration(seconds: 1),
+                        curve: Curves.decelerate)
+                    .slideX(begin: 0.2, end: 0),
                 const SizedBox(height: 15),
                 TabBar(
                   dividerHeight: 0,
@@ -161,7 +167,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       false,
                     ),
                   ],
-                ),
+                )
+                    .animate(delay: 400.ms)
+                    .shimmer(duration: const Duration(seconds: 1) - 200.ms),
                 // const SizedBox(height: 20),
                 Expanded(
                   child: GridView.builder(
@@ -223,13 +231,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Text(
                                       foodItem['name'],
                                       style: const TextStyle(
+                                          fontSize: 13,
                                           fontWeight: FontWeight.bold),
-                                    ),
+                                    )
+                                        .animate()
+                                        .fadeIn(
+                                            duration: 300.ms,
+                                            delay: const Duration(seconds: 1))
+                                        .slideX(begin: 0.2, end: 0),
                                     Text(
                                       foodItem['description'],
-                                      style:
-                                          const TextStyle(color: Colors.grey),
-                                    ),
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.grey),
+                                    )
+                                        .animate()
+                                        .fadeIn(
+                                            duration: 300.ms,
+                                            delay: const Duration(seconds: 1))
+                                        .slideX(begin: 0.2, end: 0),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -240,19 +259,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 color: Colors.amber, size: 16),
                                             Text(foodItem['rating'].toString()),
                                           ],
-                                        ),
+                                        )
+                                            .animate()
+                                            .fadeIn(
+                                                duration: 300.ms,
+                                                delay:
+                                                    const Duration(seconds: 1))
+                                            .slideX(begin: 0.2, end: 0),
                                         const Icon(Icons.favorite_border),
                                       ],
                                     )
                                   ],
                                 ),
                               )
-                                  .animate()
-                                  .fadeIn(
-                                      duration: 300.ms,
-                                      delay: const Duration(seconds: 1),
-                                      curve: Curves.decelerate)
-                                  .slideX(begin: 0.2, end: 0),
                             ],
                           ),
                         ),
@@ -263,7 +282,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-        ),
+        )
+            .animate(delay: 400.ms)
+            .shimmer(duration: const Duration(seconds: 1) - 200.ms),
       ),
     );
   }

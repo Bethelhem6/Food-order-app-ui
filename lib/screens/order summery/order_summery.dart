@@ -1,6 +1,7 @@
 import 'package:challenge_2/screens/widgets/payment_success.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class OrderSummery extends StatefulWidget {
   const OrderSummery({super.key});
@@ -106,8 +107,12 @@ class _OrderSummeryState extends State<OrderSummery> {
               ),
             ]),
           ],
-        ),
-      ),
+        )
+            .animate(delay: 400.ms)
+            .shimmer(duration: const Duration(seconds: 1) - 200.ms),
+      )
+          .animate(delay: 400.ms)
+          .shimmer(duration: const Duration(seconds: 1) - 200.ms),
       bottomSheet: const BottomBar(totalPrice: "\$18.19"),
     );
   }

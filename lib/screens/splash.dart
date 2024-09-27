@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:challenge_2/screens/root_screen.dart';
+import 'package:challenge_2/screens/home/root_screen.dart';
 import 'package:challenge_2/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +44,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     var duration = const Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => AnimatedBottomBar()));
+          MaterialPageRoute(builder: (context) => const AnimatedBottomBar()));
     });
   }
 
